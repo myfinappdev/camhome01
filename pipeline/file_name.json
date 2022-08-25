@@ -66,13 +66,51 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
+								"source": {
+									"type": "BinarySource",
+									"storeSettings": {
+										"type": "FtpReadSettings",
+										"recursive": true,
+										"useBinaryTransfer": false,
+										"deleteFilesAfterCompletion": true,
+										"disableChunking": false
+									},
+									"formatSettings": {
+										"type": "BinaryReadSettings"
+									}
+								},
+								"sink": {
+									"type": "BinarySink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings",
+										"maxConcurrentConnections": 10,
+										"copyBehavior": "FlattenHierarchy"
+									}
+								},
 								"enableStaging": false
-							}
+							},
+							"inputs": [
+								{
+									"referenceName": "Camhomeinputs",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "Camhomeout",
+									"type": "DatasetReference"
+								}
+							]
 						}
 					]
 				}
 			}
 		],
+		"variables": {
+			"filename": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
