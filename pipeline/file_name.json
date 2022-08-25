@@ -35,7 +35,7 @@
 				}
 			},
 			{
-				"name": "ForEach1",
+				"name": "IterationFiles",
 				"type": "ForEach",
 				"dependsOn": [
 					{
@@ -48,7 +48,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Get Metadata1').output.itemName",
+						"value": "@activity('GetFileName').output.itemName",
 						"type": "Expression"
 					},
 					"isSequential": true,
