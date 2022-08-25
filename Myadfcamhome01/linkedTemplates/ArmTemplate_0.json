@@ -77,6 +77,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "FtpServerLocation",
+						"fileName": "*.jpg",
 						"folderPath": "CAM_HOME01"
 					}
 				}
@@ -99,7 +100,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"folderPath": "CAM_HOME01/IMAGES/",
+						"folderPath": "CAM_HOME01/IMAGES",
 						"container": "camhome"
 					}
 				}
@@ -109,7 +110,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/copystep')]",
+			"name": "[concat(parameters('factoryName'), '/copycamhomefiles')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -194,6 +195,56 @@
 				"[concat(variables('factoryId'), '/datasets/Camhomeinputs')]",
 				"[concat(variables('factoryId'), '/datasets/Camhomeout')]",
 				"[concat(variables('factoryId'), '/linkedServices/camahomeoutstore')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/file_name')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Get Metadata1",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "Camhomeinputs",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"itemName"
+							],
+							"storeSettings": {
+								"type": "FtpReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false,
+								"useBinaryTransfer": false,
+								"disableChunking": false
+							},
+							"formatSettings": {
+								"type": "BinaryReadSettings"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Camhomeinputs')]"
 			]
 		}
 	]
