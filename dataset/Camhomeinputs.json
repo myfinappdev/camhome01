@@ -1,0 +1,18 @@
+{
+	"name": "Camhomeinputs",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "camhomeftp",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "FtpServerLocation",
+				"folderPath": "CAM_HOME01"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

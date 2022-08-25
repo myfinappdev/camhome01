@@ -1,0 +1,76 @@
+{
+	"name": "copystep",
+	"properties": {
+		"description": "new",
+		"activities": [
+			{
+				"name": "CAMHOMEFILECOPY",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.1:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "FtpReadSettings",
+							"recursive": true,
+							"useBinaryTransfer": true,
+							"deleteFilesAfterCompletion": true,
+							"disableChunking": false
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings",
+							"copyBehavior": "FlattenHierarchy"
+						}
+					},
+					"enableStaging": false,
+					"parallelCopies": 10,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "camahomeoutstore",
+								"type": "LinkedServiceReference"
+							},
+							"path": "camhome/CAM_HOME01"
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Camhomeinputs",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Camhomeout",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [
+			"SHIJU JOY"
+		],
+		"lastPublishTime": "2022-08-25T22:40:27Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

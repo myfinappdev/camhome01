@@ -1,0 +1,9 @@
+{
+	"name": "Myadfcamhome01",
+	"location": "norwayeast",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "2cee5acb-67d8-4dbc-83cd-a898d8d90b9f",
+		"tenantId": "5fc5d230-5052-4c24-add1-344f93da651f"
+	}
+}

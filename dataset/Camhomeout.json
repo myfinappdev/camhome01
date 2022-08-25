@@ -1,0 +1,19 @@
+{
+	"name": "Camhomeout",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "camahomeoutstore",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "CAM_HOME01/IMAGES/",
+				"container": "camhome"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
