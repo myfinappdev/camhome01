@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "Myadfcamhome01"
+		},
+		"camahomeoutstore_connectionString": {
+			"value": ""
+		},
+		"camhomeftp_password": {
+			"value": ""
+		},
+		"camhomeftp_properties_typeProperties_host": {
+			"value": "proftp.drivehq.com"
+		},
+		"camhomeftp_properties_typeProperties_userName": {
+			"value": "Myftp2020"
+		}
+	}
+}

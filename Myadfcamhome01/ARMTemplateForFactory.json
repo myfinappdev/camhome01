@@ -1,0 +1,200 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "Myadfcamhome01"
+		},
+		"camahomeoutstore_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'camahomeoutstore'"
+		},
+		"camhomeftp_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'camhomeftp'"
+		},
+		"camhomeftp_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "proftp.drivehq.com"
+		},
+		"camhomeftp_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "Myftp2020"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/copystep')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "new",
+				"activities": [
+					{
+						"name": "CAMHOMEFILECOPY",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.1:00:00",
+							"retry": 3,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "FtpReadSettings",
+									"recursive": true,
+									"useBinaryTransfer": true,
+									"deleteFilesAfterCompletion": true,
+									"disableChunking": false
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings",
+									"copyBehavior": "FlattenHierarchy"
+								}
+							},
+							"enableStaging": false,
+							"parallelCopies": 10,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Warning",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "camahomeoutstore",
+										"type": "LinkedServiceReference"
+									},
+									"path": "camhome/CAM_HOME01"
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "Camhomeinputs",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Camhomeout",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [
+					"SHIJU JOY"
+				],
+				"lastPublishTime": "2022-08-25T22:40:27Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Camhomeinputs')]",
+				"[concat(variables('factoryId'), '/datasets/Camhomeout')]",
+				"[concat(variables('factoryId'), '/linkedServices/camahomeoutstore')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Camhomeinputs')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "camhomeftp",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "FtpServerLocation",
+						"folderPath": "CAM_HOME01"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/camhomeftp')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Camhomeout')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "camahomeoutstore",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "CAM_HOME01/IMAGES/",
+						"container": "camhome"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/camahomeoutstore')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/camahomeoutstore')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('camahomeoutstore_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/camhomeftp')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "FtpServer",
+				"typeProperties": {
+					"host": "[parameters('camhomeftp_properties_typeProperties_host')]",
+					"port": 21,
+					"enableSsl": true,
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Basic",
+					"userName": "[parameters('camhomeftp_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('camhomeftp_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
