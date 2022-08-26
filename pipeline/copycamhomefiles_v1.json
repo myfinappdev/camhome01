@@ -29,7 +29,7 @@
 						"type": "BinarySource",
 						"storeSettings": {
 							"type": "FtpReadSettings",
-							"maxConcurrentConnections": 5,
+							"maxConcurrentConnections": 15,
 							"recursive": true,
 							"useBinaryTransfer": false,
 							"deleteFilesAfterCompletion": true,
