@@ -30,9 +30,9 @@
 						"storeSettings": {
 							"type": "FtpReadSettings",
 							"maxConcurrentConnections": 5,
-							"recursive": false,
+							"recursive": true,
 							"useBinaryTransfer": false,
-							"deleteFilesAfterCompletion": false,
+							"deleteFilesAfterCompletion": true,
 							"disableChunking": false
 						},
 						"formatSettings": {
