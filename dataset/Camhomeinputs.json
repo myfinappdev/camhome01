@@ -11,7 +11,7 @@
 			"location": {
 				"type": "FtpServerLocation",
 				"fileName": {
-					"value": "@concat('*',formatDateTime(addDays(utcNow(),-1),'yyMMdd'),'*.jpg')",
+					"value": "@concat('A',formatDateTime(addDays(utcNow(),-1),'yyMMdd'),'*.jpg')",
 					"type": "Expression"
 				},
 				"folderPath": "CAM_HOME01"
