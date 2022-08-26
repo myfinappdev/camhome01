@@ -17,7 +17,7 @@
 				"userProperties": [
 					{
 						"name": "Source",
-						"value": "proftp.drivehq.com/CAM_HOME01/*.jpg"
+						"value": "CAM_HOME01/*.jpg"
 					},
 					{
 						"name": "Destination",
@@ -29,7 +29,6 @@
 						"type": "BinarySource",
 						"storeSettings": {
 							"type": "FtpReadSettings",
-							"maxConcurrentConnections": 15,
 							"recursive": true,
 							"useBinaryTransfer": true,
 							"deleteFilesAfterCompletion": true,
