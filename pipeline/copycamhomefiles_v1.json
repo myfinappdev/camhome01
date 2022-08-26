@@ -74,13 +74,7 @@
 				"outputs": [
 					{
 						"referenceName": "Camhomeout",
-						"type": "DatasetReference",
-						"parameters": {
-							"FileName": {
-								"value": "@concat('camhome01_image_',formatDateTime(utcNow(),'yyyMMdd_HHmmss'),'.jpg')",
-								"type": "Expression"
-							}
-						}
+						"type": "DatasetReference"
 					}
 				]
 			}
