@@ -76,6 +76,7 @@
 				]
 			}
 		],
+		"concurrency": 10,
 		"annotations": [
 			"SHIJU JOY"
 		],
