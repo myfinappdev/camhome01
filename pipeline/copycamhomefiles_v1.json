@@ -36,7 +36,7 @@
 								"type": "Expression"
 							},
 							"useBinaryTransfer": true,
-							"deleteFilesAfterCompletion": false,
+							"deleteFilesAfterCompletion": true,
 							"disableChunking": false
 						},
 						"formatSettings": {
@@ -51,7 +51,7 @@
 						}
 					},
 					"enableStaging": false,
-					"parallelCopies": 10,
+					"parallelCopies": 1,
 					"logSettings": {
 						"enableCopyActivityLog": true,
 						"copyActivityLogSettings": {
@@ -81,7 +81,7 @@
 				]
 			}
 		],
-		"concurrency": 10,
+		"concurrency": 1,
 		"annotations": [
 			"SHIJU JOY"
 		],
