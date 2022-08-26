@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "FtpServerLocation",
-				"fileName": "A*.jpg",
 				"folderPath": "CAM_HOME01"
 			}
 		}
