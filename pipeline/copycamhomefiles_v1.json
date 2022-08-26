@@ -47,20 +47,7 @@
 						}
 					},
 					"enableStaging": false,
-					"parallelCopies": 10,
-					"logSettings": {
-						"enableCopyActivityLog": true,
-						"copyActivityLogSettings": {
-							"logLevel": "Warning",
-							"enableReliableLogging": false
-						},
-						"logLocationSettings": {
-							"linkedServiceName": {
-								"referenceName": "camahomeoutstore",
-								"type": "LinkedServiceReference"
-							}
-						}
-					}
+					"parallelCopies": 10
 				},
 				"inputs": [
 					{
