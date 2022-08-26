@@ -77,7 +77,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "FtpServerLocation",
-						"fileName": " *.jpg",
+						"fileName": "A*.jpg",
 						"folderPath": "CAM_HOME01"
 					}
 				}
@@ -128,7 +128,7 @@
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
-							"timeout": "0.0:30:00",
+							"timeout": "0.1:00:00",
 							"retry": 3,
 							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
@@ -137,7 +137,7 @@
 						"userProperties": [
 							{
 								"name": "Source",
-								"value": "CAM_HOME01/ *.jpg"
+								"value": "CAM_HOME01/A*.jpg"
 							},
 							{
 								"name": "Destination",
