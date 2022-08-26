@@ -10,10 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "FtpServerLocation",
-				"fileName": {
-					"value": "@concat('A',formatDateTime(addDays(utcNow(),-1),'yyMMdd'),'*.jpg')",
-					"type": "Expression"
-				},
+				"fileName": "*.jpg",
 				"folderPath": "CAM_HOME01"
 			}
 		}
