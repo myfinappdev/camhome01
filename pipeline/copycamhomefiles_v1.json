@@ -51,14 +51,17 @@
 						"enableCopyActivityLog": true,
 						"copyActivityLogSettings": {
 							"logLevel": "Warning",
-							"enableReliableLogging": false
+							"enableReliableLogging": true
 						},
 						"logLocationSettings": {
 							"linkedServiceName": {
 								"referenceName": "camahomeoutstore",
 								"type": "LinkedServiceReference"
 							},
-							"path": "camhome/CAM_HOME01"
+							"path": {
+								"value": "@concat('camhome/CAM_HOME01/IMAGES/',formatDateTime(utcNow(),'YYYYMMDD'))",
+								"type": "Expression"
+							}
 						}
 					}
 				},
