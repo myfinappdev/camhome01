@@ -28,8 +28,9 @@
 						"type": "BinarySource",
 						"storeSettings": {
 							"type": "FtpReadSettings",
-							"recursive": true,
-							"useBinaryTransfer": true,
+							"recursive": false,
+							"useBinaryTransfer": false,
+							"deleteFilesAfterCompletion": false,
 							"disableChunking": false
 						},
 						"formatSettings": {
