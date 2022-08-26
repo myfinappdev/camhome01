@@ -40,7 +40,7 @@
 				"description": "new",
 				"activities": [
 					{
-						"name": "CAMHOMEFILECOPY",
+						"name": "CAMHOMEFILECOPY_v1",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -53,11 +53,11 @@
 						"userProperties": [
 							{
 								"name": "Source",
-								"value": "CAM_HOME01/@{concat('A',formatDateTime(addDays(utcNow(),-1),'yyMMdd'),'*.jpg')}"
+								"value": "CAM_HOME01/*.jpg"
 							},
 							{
 								"name": "Destination",
-								"value": "camhome/@{concat('CAM_HOME01/IMAGES/',formatDateTime(utcNow(),'yyyyMMdd'))}/@{concat('img_camhome01_',formatDateTime(utcNow(),'yyyyMMdd_HHmmss'),'.jpg')\n}"
+								"value": "camhome/CAM_HOME01/IMAGES/"
 							}
 						],
 						"typeProperties": {
@@ -65,9 +65,13 @@
 								"type": "BinarySource",
 								"storeSettings": {
 									"type": "FtpReadSettings",
-									"maxConcurrentConnections": 5,
 									"recursive": true,
-									"useBinaryTransfer": false,
+									"wildcardFolderPath": "CAM_HOME01",
+									"wildcardFileName": {
+										"value": "@concat('*',formatDateTime(addDays(utcNow(),-1),'yyMMdd'),'*.jpg')",
+										"type": "Expression"
+									},
+									"useBinaryTransfer": true,
 									"deleteFilesAfterCompletion": true,
 									"disableChunking": false
 								},
@@ -79,9 +83,7 @@
 								"type": "BinarySink",
 								"storeSettings": {
 									"type": "AzureBlobStorageWriteSettings",
-									"maxConcurrentConnections": 5,
-									"copyBehavior": "FlattenHierarchy",
-									"blockSizeInMB": 10
+									"copyBehavior": "FlattenHierarchy"
 								}
 							},
 							"enableStaging": false,
@@ -97,10 +99,9 @@
 										"referenceName": "camahomeoutstore",
 										"type": "LinkedServiceReference"
 									},
-									"path": "copyactivity-logs"
+									"path": "camhome/CAM_HOME01"
 								}
-							},
-							"dataIntegrationUnits": 2
+							}
 						},
 						"inputs": [
 							{
@@ -172,7 +173,7 @@
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"fileName": {
-							"value": "@concat('img_camhome01_',formatDateTime(utcNow(),'yyyyMMdd_HHmmss'),'.jpg')\n",
+							"value": "@concat('img_camhome01_',formatDateTime(utcNow(),'yyyyMMdd_HHmmss'),'.jpg')",
 							"type": "Expression"
 						},
 						"folderPath": {
@@ -235,6 +236,109 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/copycamhomefiles_v1_copy1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "new",
+				"activities": [
+					{
+						"name": "CAMHOMEFILECOPY_v1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.1:00:00",
+							"retry": 3,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "CAM_HOME01/*.jpg"
+							},
+							{
+								"name": "Destination",
+								"value": "camhome/CAM_HOME01/IMAGES/"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "FtpReadSettings",
+									"recursive": true,
+									"wildcardFolderPath": "CAM_HOME01",
+									"wildcardFileName": {
+										"value": "@concat('*',formatDateTime(addDays(utcNow(),-1),'yyMMdd'),'*.jpg')",
+										"type": "Expression"
+									},
+									"useBinaryTransfer": true,
+									"deleteFilesAfterCompletion": true,
+									"disableChunking": false
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings",
+									"copyBehavior": "FlattenHierarchy"
+								}
+							},
+							"enableStaging": false,
+							"parallelCopies": 10,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Warning",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "camahomeoutstore",
+										"type": "LinkedServiceReference"
+									},
+									"path": "camhome/CAM_HOME01"
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "Camhomeinputs",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Camhomeout",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"concurrency": 10,
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [
+					"SHIJU JOY"
+				],
+				"lastPublishTime": "2022-08-25T22:40:27Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Camhomeinputs')]",
+				"[concat(variables('factoryId'), '/datasets/Camhomeout')]",
+				"[concat(variables('factoryId'), '/linkedServices/camahomeoutstore')]"
+			]
 		}
 	]
 }
