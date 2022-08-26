@@ -31,7 +31,10 @@
 							"type": "FtpReadSettings",
 							"recursive": true,
 							"wildcardFolderPath": "CAM_HOME01",
-							"wildcardFileName": "*.jpg",
+							"wildcardFileName": {
+								"value": "@concat('*',formatDateTime(addDays(utcNow(),-1),'yyMMdd'),'*.jpg')",
+								"type": "Expression"
+							},
 							"useBinaryTransfer": true,
 							"deleteFilesAfterCompletion": true,
 							"disableChunking": false
