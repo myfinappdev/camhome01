@@ -30,7 +30,7 @@
 						"storeSettings": {
 							"type": "FtpReadSettings",
 							"maxConcurrentConnections": 5,
-							"fileListPath": "CAM_HOME01",
+							"recursive": false,
 							"useBinaryTransfer": false,
 							"deleteFilesAfterCompletion": false,
 							"disableChunking": false
