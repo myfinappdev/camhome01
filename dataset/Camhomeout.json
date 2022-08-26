@@ -10,7 +10,14 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "CAM_HOME01/IMAGES",
+				"fileName": {
+					"value": "@concat('img_camhome01_',formatDateTime(utcNow(),'yyyyMMdd_HHmmss'),'.jpg')",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@concat('CAM_HOME01/IMAGES/',formatDateTime(utcNow(),'yyyyMMdd'))",
+					"type": "Expression"
+				},
 				"container": "camhome"
 			}
 		}
