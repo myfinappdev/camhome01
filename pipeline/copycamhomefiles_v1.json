@@ -43,9 +43,7 @@
 						"type": "BinarySink",
 						"storeSettings": {
 							"type": "AzureBlobStorageWriteSettings",
-							"maxConcurrentConnections": 5,
-							"copyBehavior": "FlattenHierarchy",
-							"blockSizeInMB": 10
+							"copyBehavior": "FlattenHierarchy"
 						}
 					},
 					"enableStaging": false,
