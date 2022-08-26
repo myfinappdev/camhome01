@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": {
-					"value": "@concat('img_camhome01_',formatDateTime(utcNow(),'yyyyMMdd_HHmmss'),'.jpg')",
+					"value": "@concat('img_camhome01_',formatDateTime(utcNow(),'yyyyMMdd_HHmmss'),string(rand(10000000,99999999)),'.jpg')",
 					"type": "Expression"
 				},
 				"folderPath": {
