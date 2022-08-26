@@ -102,7 +102,13 @@
 							"outputs": [
 								{
 									"referenceName": "Camhomeout",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"FileName": {
+											"value": "@item().itemName",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
