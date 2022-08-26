@@ -9,7 +9,8 @@
 		"type": "Binary",
 		"typeProperties": {
 			"location": {
-				"type": "FtpServerLocation"
+				"type": "FtpServerLocation",
+				"folderPath": "CAM_HOME01"
 			}
 		}
 	},
