@@ -66,7 +66,12 @@
 							},
 							"userProperties": [
 								{
-									"value": ""
+									"name": "Source",
+									"value": "CAM_HOME01/*.jpg"
+								},
+								{
+									"name": "Destination",
+									"value": "camhome/CAM_HOME01/IMAGES/@{item().itemName}"
 								}
 							],
 							"typeProperties": {
@@ -91,7 +96,8 @@
 										"copyBehavior": "FlattenHierarchy"
 									}
 								},
-								"enableStaging": false
+								"enableStaging": false,
+								"parallelCopies": 10
 							},
 							"inputs": [
 								{
