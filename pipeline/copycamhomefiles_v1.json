@@ -17,7 +17,7 @@
 				"userProperties": [
 					{
 						"name": "Source",
-						"value": "CAM_HOME01/A22082509143610.jpg"
+						"value": "CAM_HOME01/ *.jpg"
 					},
 					{
 						"name": "Destination",
