@@ -21,7 +21,7 @@
 					},
 					{
 						"name": "Destination",
-						"value": "camhome/CAM_HOME01/IMAGES"
+						"value": "camhome/CAM_HOME01/IMAGES/"
 					}
 				],
 				"typeProperties": {
@@ -58,7 +58,7 @@
 								"referenceName": "camahomeoutstore",
 								"type": "LinkedServiceReference"
 							},
-							"path": ""
+							"path": "camhome/CAM_HOME01"
 						}
 					}
 				},
