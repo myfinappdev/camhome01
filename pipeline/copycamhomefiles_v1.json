@@ -44,7 +44,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageWriteSettings",
 							"maxConcurrentConnections": 5,
-							"copyBehavior": "PreserveHierarchy"
+							"copyBehavior": "FlattenHierarchy"
 						}
 					},
 					"enableStaging": false,
