@@ -29,7 +29,7 @@
 						"type": "BinarySource",
 						"storeSettings": {
 							"type": "FtpReadSettings",
-							"recursive": false,
+							"fileListPath": "CAM_HOME01",
 							"useBinaryTransfer": false,
 							"deleteFilesAfterCompletion": false,
 							"disableChunking": false
