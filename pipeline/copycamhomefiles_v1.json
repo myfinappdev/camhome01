@@ -29,6 +29,7 @@
 						"type": "BinarySource",
 						"storeSettings": {
 							"type": "FtpReadSettings",
+							"maxConcurrentConnections": 5,
 							"fileListPath": "CAM_HOME01",
 							"useBinaryTransfer": false,
 							"deleteFilesAfterCompletion": false,
