@@ -58,7 +58,7 @@
 								"referenceName": "camahomeoutstore",
 								"type": "LinkedServiceReference"
 							},
-							"path": "copyactivity-logs"
+							"path": ""
 						}
 					}
 				},
