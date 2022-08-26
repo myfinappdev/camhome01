@@ -30,6 +30,8 @@
 						"storeSettings": {
 							"type": "FtpReadSettings",
 							"recursive": true,
+							"wildcardFolderPath": "CAM_HOME01",
+							"wildcardFileName": "*.jpg",
 							"useBinaryTransfer": true,
 							"deleteFilesAfterCompletion": true,
 							"disableChunking": false
