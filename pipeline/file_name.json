@@ -111,7 +111,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"FileName": {
-											"value": "@item().itemName",
+											"value": "@item().FileName",
 											"type": "Expression"
 										}
 									}
@@ -122,11 +122,7 @@
 				}
 			}
 		],
-		"variables": {
-			"filename": {
-				"type": "String"
-			}
-		},
+		"concurrency": 10,
 		"annotations": []
 	}
 }
