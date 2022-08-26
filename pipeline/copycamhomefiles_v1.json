@@ -30,7 +30,7 @@
 						"storeSettings": {
 							"type": "FtpReadSettings",
 							"recursive": true,
-							"useBinaryTransfer": true,
+							"useBinaryTransfer": false,
 							"deleteFilesAfterCompletion": true,
 							"disableChunking": false
 						},
