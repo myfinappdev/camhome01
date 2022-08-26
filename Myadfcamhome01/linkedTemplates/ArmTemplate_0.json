@@ -119,7 +119,7 @@
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"fileName": {
-							"value": "@concat('img_camhome01_',formatDateTime(utcNow(),'yyyyMMdd_HHmmss'),string(rand(10000000,99999999)),'.jpg')",
+							"value": "@concat('img_',formatDateTime(utcNow(),'yyyyMMdd_HHmmss'),string(rand(10000000,99999999)),'.jpg')",
 							"type": "Expression"
 						},
 						"folderPath": {
@@ -159,7 +159,7 @@
 							},
 							{
 								"name": "Destination",
-								"value": "camhome/@{concat('CAM_HOME01/IMAGES/',formatDateTime(utcNow(),'yyyyMMdd'))}/@{concat('img_camhome01_',formatDateTime(utcNow(),'yyyyMMdd_HHmmss'),string(rand(10000000,99999999)),'.jpg')}"
+								"value": "camhome/@{concat('CAM_HOME01/IMAGES/',formatDateTime(utcNow(),'yyyyMMdd'))}/@{concat('img_',formatDateTime(utcNow(),'yyyyMMdd_HHmmss'),string(rand(10000000,99999999)),'.jpg')}"
 							}
 						],
 						"typeProperties": {
