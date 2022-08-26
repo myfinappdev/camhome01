@@ -29,7 +29,7 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/copycamhomefiles')]",
+			"name": "[concat(parameters('factoryName'), '/copycamhomefiles_v1')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -40,20 +40,29 @@
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
-							"timeout": "0.1:00:00",
+							"timeout": "0.0:30:00",
 							"retry": 3,
 							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "CAM_HOME01/ *.jpg"
+							},
+							{
+								"name": "Destination",
+								"value": "camhome/@{concat('CAM_HOME01/IMAGES/',formatDateTime(utcNow(),'yyyyMMdd'))}/@{concat('img_camhome01_',formatDateTime(utcNow(),'yyyyMMdd_HHmmss'),'.jpg')\n}"
+							}
+						],
 						"typeProperties": {
 							"source": {
 								"type": "BinarySource",
 								"storeSettings": {
 									"type": "FtpReadSettings",
-									"recursive": true,
-									"useBinaryTransfer": true,
+									"recursive": false,
+									"useBinaryTransfer": false,
 									"deleteFilesAfterCompletion": true,
 									"disableChunking": false
 								},
@@ -65,6 +74,7 @@
 								"type": "BinarySink",
 								"storeSettings": {
 									"type": "AzureBlobStorageWriteSettings",
+									"maxConcurrentConnections": 5,
 									"copyBehavior": "FlattenHierarchy"
 								}
 							},
@@ -80,8 +90,7 @@
 									"linkedServiceName": {
 										"referenceName": "camahomeoutstore",
 										"type": "LinkedServiceReference"
-									},
-									"path": "camhome/CAM_HOME01"
+									}
 								}
 							}
 						},
@@ -123,12 +132,13 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Get Metadata1",
+						"name": "GetfileName",
+						"description": "# File Name",
 						"type": "GetMetadata",
 						"dependsOn": [],
 						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
+							"timeout": "0.1:00:00",
+							"retry": 3,
 							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
 							"secureInput": false
@@ -147,7 +157,7 @@
 								"type": "FtpReadSettings",
 								"recursive": true,
 								"enablePartitionDiscovery": false,
-								"useBinaryTransfer": false,
+								"useBinaryTransfer": true,
 								"disableChunking": false
 							},
 							"formatSettings": {
@@ -156,6 +166,7 @@
 						}
 					}
 				],
+				"concurrency": 10,
 				"policy": {
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
@@ -180,7 +191,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "FtpServerLocation",
-						"fileName": "*.jpg",
+						"fileName": " *.jpg",
 						"folderPath": "CAM_HOME01"
 					}
 				}
@@ -203,7 +214,14 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"folderPath": "CAM_HOME01/IMAGES",
+						"fileName": {
+							"value": "@concat('img_camhome01_',formatDateTime(utcNow(),'yyyyMMdd_HHmmss'),'.jpg')\n",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@concat('CAM_HOME01/IMAGES/',formatDateTime(utcNow(),'yyyyMMdd'))",
+							"type": "Expression"
+						},
 						"container": "camhome"
 					}
 				}
