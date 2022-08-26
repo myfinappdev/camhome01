@@ -53,7 +53,7 @@
 						"userProperties": [
 							{
 								"name": "Source",
-								"value": "CAM_HOME01/.jpg"
+								"value": "CAM_HOME01/@{concat('*',formatDateTime(addDays(utcNow(),-1),'yyMMdd'),'*.jpg')}"
 							},
 							{
 								"name": "Destination",
@@ -222,7 +222,10 @@
 				"typeProperties": {
 					"location": {
 						"type": "FtpServerLocation",
-						"fileName": "*",
+						"fileName": {
+							"value": "@concat('*',formatDateTime(addDays(utcNow(),-1),'yyMMdd'),'*.jpg')",
+							"type": "Expression"
+						},
 						"folderPath": "CAM_HOME01"
 					}
 				}
