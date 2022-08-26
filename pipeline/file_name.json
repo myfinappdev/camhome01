@@ -3,36 +3,61 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "GetfileName",
-				"description": "# File Name",
-				"type": "GetMetadata",
+				"name": "Copy data1",
+				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.1:00:00",
-					"retry": 3,
+					"retry": 0,
 					"retryIntervalInSeconds": 30,
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "CAM_HOME01/.jpg"
+					},
+					{
+						"name": "Destination",
+						"value": "camhome/@{concat('CAM_HOME01/IMAGES/',formatDateTime(utcNow(),'yyyyMMdd'))}/@{concat('img_camhome01_',formatDateTime(utcNow(),'yyyyMMdd_HHmmss'),'.jpg')\n}"
+					}
+				],
 				"typeProperties": {
-					"dataset": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "FtpReadSettings",
+							"recursive": true,
+							"useBinaryTransfer": true,
+							"disableChunking": false
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings",
+							"maxConcurrentConnections": 10
+						}
+					},
+					"enableStaging": false,
+					"parallelCopies": 5
+				},
+				"inputs": [
+					{
 						"referenceName": "Camhomeinputs",
 						"type": "DatasetReference"
-					},
-					"fieldList": [
-						"itemName"
-					],
-					"storeSettings": {
-						"type": "FtpReadSettings",
-						"enablePartitionDiscovery": false,
-						"useBinaryTransfer": true,
-						"disableChunking": false
-					},
-					"formatSettings": {
-						"type": "BinaryReadSettings"
 					}
-				}
+				],
+				"outputs": [
+					{
+						"referenceName": "Camhomeout",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"concurrency": 10,
