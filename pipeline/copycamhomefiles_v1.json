@@ -42,6 +42,7 @@
 						"type": "BinarySink",
 						"storeSettings": {
 							"type": "AzureBlobStorageWriteSettings",
+							"maxConcurrentConnections": 5,
 							"copyBehavior": "FlattenHierarchy"
 						}
 					},
@@ -51,16 +52,12 @@
 						"enableCopyActivityLog": true,
 						"copyActivityLogSettings": {
 							"logLevel": "Warning",
-							"enableReliableLogging": true
+							"enableReliableLogging": false
 						},
 						"logLocationSettings": {
 							"linkedServiceName": {
 								"referenceName": "camahomeoutstore",
 								"type": "LinkedServiceReference"
-							},
-							"path": {
-								"value": "@concat('camhome/CAM_HOME01/IMAGES/',formatDateTime(utcNow(),'YYYYMMDD'))",
-								"type": "Expression"
 							}
 						}
 					}
