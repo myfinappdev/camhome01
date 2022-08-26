@@ -149,11 +149,11 @@
 						"userProperties": [
 							{
 								"name": "Source",
-								"value": "CAM_HOME01/*.jpg"
+								"value": "CAM_HOME01/*"
 							},
 							{
 								"name": "Destination",
-								"value": "camhome/CAM_HOME01/IMAGES/"
+								"value": "camhome/CAM_HOME01/IMAGES/20220826/"
 							}
 						],
 						"typeProperties": {
@@ -222,7 +222,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "FtpServerLocation",
-						"fileName": "*.jpg",
+						"fileName": "*",
 						"folderPath": "CAM_HOME01"
 					}
 				}
@@ -275,7 +275,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"folderPath": "CAM_HOME01/IMAGES",
+						"folderPath": "CAM_HOME01/IMAGES/20220826",
 						"container": "camhome"
 					}
 				}
