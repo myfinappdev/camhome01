@@ -21,7 +21,7 @@
 					},
 					{
 						"name": "Destination",
-						"value": "camhome/CAM_HOME01/IMAGES/@{concat('camhome01_image_',formatDateTime(utcNow(),'yyyMMdd_HHmmss'),'.jpg')}"
+						"value": "camhome/@{concat('CAM_HOME01/IMAGES/',formatDateTime(utcNow(),'yyyyMMdd'))}/@{concat('img_camhome01_',formatDateTime(utcNow(),'yyyyMMdd_HHmmss'),'.jpg')\n}"
 					}
 				],
 				"typeProperties": {
@@ -29,7 +29,7 @@
 						"type": "BinarySource",
 						"storeSettings": {
 							"type": "FtpReadSettings",
-							"recursive": true,
+							"recursive": false,
 							"useBinaryTransfer": false,
 							"deleteFilesAfterCompletion": true,
 							"disableChunking": false
