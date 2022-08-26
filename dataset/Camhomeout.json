@@ -10,8 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "IMAGES",
-				"folderPath": "CAM_HOME01",
+				"folderPath": "CAM_HOME01/IMAGES",
 				"container": "camhome"
 			}
 		}
