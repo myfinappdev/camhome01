@@ -4,7 +4,7 @@
 		"description": "new",
 		"activities": [
 			{
-				"name": "CAMHOMEFILECOPY",
+				"name": "CAMHOMEFILECOPY_v1",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -17,7 +17,7 @@
 				"userProperties": [
 					{
 						"name": "Source",
-						"value": "CAM_HOME01/@{concat('A',formatDateTime(addDays(utcNow(),-1),'yyMMdd'),'*.jpg')}"
+						"value": "CAM_HOME01/*.jpg"
 					},
 					{
 						"name": "Destination",
@@ -49,7 +49,7 @@
 						}
 					},
 					"enableStaging": false,
-					"parallelCopies": 10,
+					"parallelCopies": 5,
 					"logSettings": {
 						"enableCopyActivityLog": true,
 						"copyActivityLogSettings": {
@@ -64,7 +64,7 @@
 							"path": "copyactivity-logs"
 						}
 					},
-					"dataIntegrationUnits": 2
+					"dataIntegrationUnits": 4
 				},
 				"inputs": [
 					{
