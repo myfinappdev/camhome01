@@ -72,7 +72,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Camhomeinputs",
+						"referenceName": "Camhomeinputs_copy_v2",
 						"type": "DatasetReference"
 					}
 				],
