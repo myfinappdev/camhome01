@@ -15,7 +15,7 @@
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@concat('CAM_HOME01/IMAGES/',formatDateTime(utcNow(),'yyyyMMdd'))",
+					"value": "@concat('CAM_HOME01/IMAGES/',formatDateTime(utcNow(),'yyyyMMddss'))",
 					"type": "Expression"
 				},
 				"container": "camhome"
