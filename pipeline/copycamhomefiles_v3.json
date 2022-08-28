@@ -21,7 +21,7 @@
 					},
 					{
 						"name": "Destination",
-						"value": "camhome/@{concat('CAM_HOME01/IMAGES/',formatDateTime(utcNow(),'yyyyMMdd'))}/"
+						"value": "camhome/@{concat('CAM_HOME01/IMAGES/',formatDateTime(utcNow(),'yyyyMMddss'))}/@{concat('img_',formatDateTime(utcNow(),'yyyyMMdd_HHmmss'),string(rand(10000000,99999999)),'.jpg')}"
 					}
 				],
 				"typeProperties": {
