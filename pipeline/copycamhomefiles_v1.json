@@ -51,6 +51,9 @@
 					},
 					"enableStaging": false,
 					"parallelCopies": 1,
+					"skipErrorFile": {
+						"fileMissing": false
+					},
 					"logSettings": {
 						"enableCopyActivityLog": true,
 						"copyActivityLogSettings": {
@@ -64,7 +67,8 @@
 							},
 							"path": "camhome/CAM_HOME01"
 						}
-					}
+					},
+					"dataIntegrationUnits": 2
 				},
 				"inputs": [
 					{
