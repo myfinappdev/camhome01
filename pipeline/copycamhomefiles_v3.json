@@ -32,7 +32,7 @@
 							"recursive": true,
 							"wildcardFolderPath": "CAM_HOME01",
 							"wildcardFileName": {
-								"value": "@concat('*',formatDateTime(addDays(utcNow(),-1),'yyMMdd'),'*.jpg')",
+								"value": "@concat('*',formatDateTime(addDays(utcNow(),0),'yyMMdd'),'*.jpg')",
 								"type": "Expression"
 							},
 							"useBinaryTransfer": true,
