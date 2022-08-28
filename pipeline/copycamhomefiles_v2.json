@@ -78,7 +78,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "Camhomeout",
+						"referenceName": "Camhomeout_copyV2",
 						"type": "DatasetReference"
 					}
 				]
