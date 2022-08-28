@@ -221,7 +221,7 @@
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"folderPath": {
-							"value": "@concat('CAM_HOME01/IMAGES/',formatDateTime(utcNow(),'yyyyMMddss'))",
+							"value": "@concat('CAM_HOME01/IMAGES/',formatDateTime(utcNow(),'yyyyMMddHHss'))",
 							"type": "Expression"
 						},
 						"container": "camhome"
