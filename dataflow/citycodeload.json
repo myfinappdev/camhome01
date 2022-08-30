@@ -10,6 +10,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "citycode"
+				},
+				{
+					"dataset": {
+						"referenceName": "currencycsv",
+						"type": "DatasetReference"
+					},
+					"name": "currencycde"
 				}
 			],
 			"sinks": [
@@ -19,6 +26,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "citycodedbload"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTablecurrency",
+						"type": "DatasetReference"
+					},
+					"name": "currenycodedbload"
 				}
 			],
 			"transformations": [],
@@ -32,6 +46,17 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> citycode",
+				"source(output(",
+				"          Column_1 as string,",
+				"          Column_2 as string,",
+				"          Column_3 as string,",
+				"          Column_4 as string,",
+				"          Column_5 as string,",
+				"          Column_6 as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> currencycde",
 				"citycode sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
@@ -41,7 +66,17 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> citycodedbload"
+				"     errorHandlingOption: 'stopOnFirstError') ~> citycodedbload",
+				"currencycde sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:true,",
+				"     insertable:true,",
+				"     updateable:true,",
+				"     upsertable:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> currenycodedbload"
 			]
 		}
 	}

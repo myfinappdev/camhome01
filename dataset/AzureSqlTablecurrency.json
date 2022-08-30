@@ -1,0 +1,16 @@
+{
+	"name": "AzureSqlTablecurrency",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabasefinapp",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "currency_mst"
+		}
+	}
+}
