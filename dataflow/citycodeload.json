@@ -84,12 +84,12 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
-				"          Column_1,",
-				"          Column_2,",
-				"          Column_3,",
-				"          Column_4,",
-				"          Column_5,",
-				"          Column_6",
+				"          Country = Column_1,",
+				"          currency_name = Column_2,",
+				"          currency_code = Column_3,",
+				"          currency_id = Column_4,",
+				"          Minor_unit = Column_5,",
+				"          change_date = Column_6",
 				"     )) ~> currenycodedbload"
 			]
 		}
