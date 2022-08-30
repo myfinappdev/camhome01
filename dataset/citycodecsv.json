@@ -1,0 +1,41 @@
+{
+	"name": "citycodecsv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStoraglocal",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "countries.csv",
+				"folderPath": "FINAPP",
+				"container": "finapphome"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "String"
+			},
+			{
+				"name": "alpha2",
+				"type": "String"
+			},
+			{
+				"name": "alpha3",
+				"type": "String"
+			},
+			{
+				"name": "name",
+				"type": "String"
+			}
+		]
+	}
+}
