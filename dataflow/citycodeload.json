@@ -24,6 +24,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "source2"
+				},
+				{
+					"dataset": {
+						"referenceName": "currencycsv",
+						"type": "DatasetReference"
+					},
+					"name": "currencycode"
 				}
 			],
 			"sinks": [
@@ -33,6 +40,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "sinkcitycode"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTablecurrecny",
+						"type": "DatasetReference"
+					},
+					"name": "sinkcurrency"
 				}
 			],
 			"transformations": [],
@@ -68,6 +82,17 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source2",
+				"source(output(",
+				"          Column_1 as string,",
+				"          Column_2 as string,",
+				"          Column_3 as string,",
+				"          Column_4 as string,",
+				"          Column_5 as string,",
+				"          Column_6 as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> currencycode",
 				"citycode sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
@@ -83,7 +108,25 @@
 				"          code1 = alpha2,",
 				"          code2 = alpha3,",
 				"          name",
-				"     )) ~> sinkcitycode"
+				"     )) ~> sinkcitycode",
+				"currencycode sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          country = Column_1,",
+				"          currency_name = Column_2,",
+				"          currency_code = Column_3,",
+				"          currency_id = Column_4,",
+				"          min_unit = Column_5,",
+				"          last_changedate = Column_6",
+				"     )) ~> sinkcurrency"
 			]
 		}
 	}
