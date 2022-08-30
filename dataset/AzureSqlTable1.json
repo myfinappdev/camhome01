@@ -10,7 +10,7 @@
 		"schema": [],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "city_mst"
+			"table": "city_all_mst"
 		}
 	}
 }
