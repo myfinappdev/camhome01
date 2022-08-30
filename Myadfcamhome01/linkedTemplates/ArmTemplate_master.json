@@ -19,6 +19,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'camhomeftp'"
 		},
+		"AzureBlobStoraglocal_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStoraglocal'"
+		},
+		"AzureSqlDatabasefinapp_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabasefinapp'"
+		},
 		"camhomeftp_properties_typeProperties_host": {
 			"type": "string",
 			"defaultValue": "proftp.drivehq.com"
@@ -63,6 +71,12 @@
 					"camhomeftp_password": {
 						"value": "[parameters('camhomeftp_password')]"
 					},
+					"AzureBlobStoraglocal_connectionString": {
+						"value": "[parameters('AzureBlobStoraglocal_connectionString')]"
+					},
+					"AzureSqlDatabasefinapp_connectionString": {
+						"value": "[parameters('AzureSqlDatabasefinapp_connectionString')]"
+					},
 					"camhomeftp_properties_typeProperties_host": {
 						"value": "[parameters('camhomeftp_properties_typeProperties_host')]"
 					},
@@ -72,6 +86,26 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "Myadfcamhome01_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Myadfcamhome01_ArmTemplate_0')]"
+			]
 		}
 	]
 }

@@ -14,6 +14,12 @@
 		"camhomeftp_password": {
 			"value": ""
 		},
+		"AzureBlobStoraglocal_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabasefinapp_connectionString": {
+			"value": ""
+		},
 		"camhomeftp_properties_typeProperties_host": {
 			"value": "proftp.drivehq.com"
 		},
