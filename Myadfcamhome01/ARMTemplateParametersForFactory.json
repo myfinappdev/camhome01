@@ -8,16 +8,16 @@
 		"AzureBlobStorage1_connectionString": {
 			"value": ""
 		},
-		"camahomeoutstore_connectionString": {
-			"value": ""
-		},
-		"camhomeftp_password": {
-			"value": ""
-		},
 		"AzureBlobStoraglocal_connectionString": {
 			"value": ""
 		},
 		"AzureSqlDatabasefinapp_connectionString": {
+			"value": ""
+		},
+		"camahomeoutstore_connectionString": {
+			"value": ""
+		},
+		"camhomeftp_password": {
 			"value": ""
 		},
 		"camhomeftp_properties_typeProperties_host": {

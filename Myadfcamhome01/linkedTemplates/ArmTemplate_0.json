@@ -11,14 +11,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
-		"camahomeoutstore_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'camahomeoutstore'"
-		},
-		"camhomeftp_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'camhomeftp'"
-		},
 		"AzureBlobStoraglocal_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStoraglocal'"
@@ -26,6 +18,14 @@
 		"AzureSqlDatabasefinapp_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabasefinapp'"
+		},
+		"camahomeoutstore_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'camahomeoutstore'"
+		},
+		"camhomeftp_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'camhomeftp'"
 		},
 		"camhomeftp_properties_typeProperties_host": {
 			"type": "string",
@@ -50,6 +50,32 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('AzureBlobStorage1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStoraglocal')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStoraglocal_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabasefinapp')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabasefinapp_connectionString')]"
 				}
 			},
 			"dependsOn": []
@@ -90,30 +116,46 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStoraglocal')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabasefinapp",
+					"type": "LinkedServiceReference"
+				},
 				"annotations": [],
-				"type": "AzureBlobStorage",
+				"type": "AzureSqlTable",
+				"schema": [],
 				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStoraglocal_connectionString')]"
+					"schema": "dbo",
+					"table": "city_all_mst"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabasefinapp')]"
+			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabasefinapp')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTablecurrency')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabasefinapp",
+					"type": "LinkedServiceReference"
+				},
 				"annotations": [],
-				"type": "AzureSqlDatabase",
+				"type": "AzureSqlTable",
+				"schema": [],
 				"typeProperties": {
-					"connectionString": "[parameters('AzureSqlDatabasefinapp_connectionString')]"
+					"schema": "dbo",
+					"table": "currency_mst"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabasefinapp')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Camhomeinputs')]",
@@ -313,27 +355,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlTable1')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabasefinapp",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "city_mst"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabasefinapp')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/currencycsv')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -381,7 +402,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlTablecurrency')]",
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTablecity')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -394,7 +415,28 @@
 				"schema": [],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "currency_mst"
+					"table": "city_code_mst"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabasefinapp')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTablecurrecny')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabasefinapp",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "currency_code_mst"
 				}
 			},
 			"dependsOn": [
@@ -710,218 +752,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/Camhomeinputs')]",
 				"[concat(variables('factoryId'), '/datasets/Camhomeout')]",
-				"[concat(variables('factoryId'), '/linkedServices/camahomeoutstore')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/copycamhomefiles_v2')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "new",
-				"activities": [
-					{
-						"name": "CAMHOMEFILECOPY_v1",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.1:00:00",
-							"retry": 3,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": true,
-							"secureInput": true
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "CAM_HOME01/*.jpg"
-							},
-							{
-								"name": "Destination",
-								"value": "camhome/@{concat('CAM_HOME01/IMAGES/',formatDateTime(utcNow(),'yyyyMMdd'))}/"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "BinarySource",
-								"storeSettings": {
-									"type": "FtpReadSettings",
-									"recursive": true,
-									"wildcardFolderPath": "CAM_HOME01",
-									"wildcardFileName": {
-										"value": "@concat('*',formatDateTime(addDays(utcNow(),-1),'yyMMdd'),'*.jpg')",
-										"type": "Expression"
-									},
-									"useBinaryTransfer": true,
-									"deleteFilesAfterCompletion": true,
-									"disableChunking": false
-								},
-								"formatSettings": {
-									"type": "BinaryReadSettings"
-								}
-							},
-							"sink": {
-								"type": "BinarySink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								}
-							},
-							"enableStaging": false,
-							"parallelCopies": 1,
-							"skipErrorFile": {
-								"fileMissing": false
-							},
-							"logSettings": {
-								"enableCopyActivityLog": true,
-								"copyActivityLogSettings": {
-									"logLevel": "Warning",
-									"enableReliableLogging": false
-								},
-								"logLocationSettings": {
-									"linkedServiceName": {
-										"referenceName": "camahomeoutstore",
-										"type": "LinkedServiceReference"
-									},
-									"path": "camhome/CAM_HOME01"
-								}
-							},
-							"dataIntegrationUnits": 2
-						},
-						"inputs": [
-							{
-								"referenceName": "Camhomeinputs_copy_v2",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "Camhomeout_copyV2",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"concurrency": 1,
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [
-					"SHIJU JOY"
-				],
-				"lastPublishTime": "2022-08-25T22:40:27Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/Camhomeinputs_copy_v2')]",
-				"[concat(variables('factoryId'), '/datasets/Camhomeout_copyV2')]",
-				"[concat(variables('factoryId'), '/linkedServices/camahomeoutstore')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/copycamhomefiles_v3')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "new",
-				"activities": [
-					{
-						"name": "CAMHOMEFILECOPY_v1",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.1:00:00",
-							"retry": 3,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": true,
-							"secureInput": true
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "CAM_HOME01/*.jpg"
-							},
-							{
-								"name": "Destination",
-								"value": "camhome/@{concat('CAM_HOME01/IMAGES/',formatDateTime(utcNow(),'yyyyMMddHHss'))}/"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "BinarySource",
-								"storeSettings": {
-									"type": "FtpReadSettings",
-									"recursive": true,
-									"wildcardFolderPath": "CAM_HOME01",
-									"wildcardFileName": {
-										"value": "@concat('*',formatDateTime(addDays(utcNow(),0),'yyMMdd'),'*.jpg')",
-										"type": "Expression"
-									},
-									"useBinaryTransfer": true,
-									"deleteFilesAfterCompletion": true,
-									"disableChunking": false
-								},
-								"formatSettings": {
-									"type": "BinaryReadSettings"
-								}
-							},
-							"sink": {
-								"type": "BinarySink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								}
-							},
-							"enableStaging": false,
-							"parallelCopies": 1,
-							"skipErrorFile": {
-								"fileMissing": false
-							},
-							"logSettings": {
-								"enableCopyActivityLog": true,
-								"copyActivityLogSettings": {
-									"logLevel": "Warning",
-									"enableReliableLogging": false
-								},
-								"logLocationSettings": {
-									"linkedServiceName": {
-										"referenceName": "camahomeoutstore",
-										"type": "LinkedServiceReference"
-									},
-									"path": "camhome/CAM_HOME01"
-								}
-							},
-							"dataIntegrationUnits": 2
-						},
-						"inputs": [
-							{
-								"referenceName": "Camhomeinputs_v3",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "Camhomeout_v3",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"concurrency": 1,
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [
-					"SHIJU JOY"
-				],
-				"lastPublishTime": "2022-08-25T22:40:27Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/Camhomeinputs_v3')]",
-				"[concat(variables('factoryId'), '/datasets/Camhomeout_v3')]",
 				"[concat(variables('factoryId'), '/linkedServices/camahomeoutstore')]"
 			]
 		}

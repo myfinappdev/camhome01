@@ -11,14 +11,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
-		"camahomeoutstore_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'camahomeoutstore'"
-		},
-		"camhomeftp_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'camhomeftp'"
-		},
 		"AzureBlobStoraglocal_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStoraglocal'"
@@ -26,6 +18,14 @@
 		"AzureSqlDatabasefinapp_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabasefinapp'"
+		},
+		"camahomeoutstore_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'camahomeoutstore'"
+		},
+		"camhomeftp_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'camhomeftp'"
 		},
 		"camhomeftp_properties_typeProperties_host": {
 			"type": "string",
@@ -65,17 +65,17 @@
 					"AzureBlobStorage1_connectionString": {
 						"value": "[parameters('AzureBlobStorage1_connectionString')]"
 					},
-					"camahomeoutstore_connectionString": {
-						"value": "[parameters('camahomeoutstore_connectionString')]"
-					},
-					"camhomeftp_password": {
-						"value": "[parameters('camhomeftp_password')]"
-					},
 					"AzureBlobStoraglocal_connectionString": {
 						"value": "[parameters('AzureBlobStoraglocal_connectionString')]"
 					},
 					"AzureSqlDatabasefinapp_connectionString": {
 						"value": "[parameters('AzureSqlDatabasefinapp_connectionString')]"
+					},
+					"camahomeoutstore_connectionString": {
+						"value": "[parameters('camahomeoutstore_connectionString')]"
+					},
+					"camhomeftp_password": {
+						"value": "[parameters('camhomeftp_password')]"
 					},
 					"camhomeftp_properties_typeProperties_host": {
 						"value": "[parameters('camhomeftp_properties_typeProperties_host')]"
